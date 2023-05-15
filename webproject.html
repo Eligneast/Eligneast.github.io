@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <title>大学物理实验误差计算器</title>
+    <link rel="stylesheet" href=".\css\main.css">
+</head>
+
+<body>
+    <div id="input_area" class="box">
+        <div id="probability-container">
+            <label for="probability-container"> 置信水平（置信概率） </label>
+            <input type="text" id="probability" height="20px" class="inputBox" value="0.95" oninput="uncertainty()">
+        </div>
+        <label><input type="checkbox" name="自由度取无穷大" id="DF_inf" checked onchange="uncertainty()"> 自由度取无穷大 </label>
+        <div>数据（以空格隔开）</div>
+        <textarea id="input_data" height="20px" class="inputBox" oninput="calculate()"></textarea>
+    </div>
+    <div id="result_area">
+        <div id="uncertainty">
+            <div id="std" class="rBox">
+                <p class="uncMark"> 标准不确定度 </p>
+                <p id="stdvalue">
+                    <math id="stdContent">
+                        <mrow>
+                            <mi>x</mi>
+                            <mo>=</mo>
+                            <mo>(</mo>
+                            <mn id="mean1">0</mn>
+                            <mo>&#x00b1;</mo>
+                            <mn id="s1">1</mn>
+                            <mo>)</mo>
+                            <mo>&times;</mo>
+                            <msup>
+                                <mn>10</mn>
+                                <mn id="p1">0</mn>
+                            </msup>
+                        </mrow>
+                    </math>
+                </p>
+            </div>
+            <div id="ext" class="rBox">
+                <p class="uncMark"> 扩展不确定度 </p>
+                <p id="extvalue">
+                    <math>
+                        <mrow>
+                            <mi>x</mi>
+                            <mo>=</mo>
+                            <mo>(</mo>
+                            <mn id="mean2">0</mn>
+                            <mo>&#x00b1;</mo>
+                            <mn id="s2">2</mn>
+                            <mo>)</mo>
+                            <mo>&times;</mo>
+                            <msup>
+                                <mn>10</mn>
+                                <mn id="p2">0</mn>
+                            </msup>
+                        </mrow>
+                    </math>
+                </p>
+            </div>
+        </div>
+        <div id="result_table" class="box">
+            <table id="statistic">
+                <tr>
+                    <th class="left">计算类型</th>
+                    <th class="right">计算值</th>
+                </tr>
+                <tr>
+                    <td class="left">总和</td>
+                    <td id="summation" class="right"></td>
+                </tr>
+                <tr>
+                    <td class="left">均值</td>
+                    <td id="mean" class="right"></td>
+                </tr>
+                <tr>
+                    <td class="left">测量列的实验标准差</td>
+                    <td id="sstddev" class="right"></td>
+                </tr>
+                <tr>
+                    <td class="left">平均值的实验标准差</td>
+                    <td id="sstderr" class="right"></td>
+                </tr>
+                <tr>
+                    <td class="left">测量列的平均绝对误差</td>
+                    <td id="absdev" class="right"></td>
+                </tr>
+                <tr>
+                    <td class="left last">平均值的平均绝对误差</td>
+                    <td id="abserr" class="last right"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="sidebar-button box">
+        <div id="show_fomula">查看公式</div>
+    </div>
+    <div id="formula-sidebar">
+        <table id="fomula">
+            <tr>
+                <th class="left">计算类型</th>
+                <th class="right">公式</th>
+            </tr>
+            <tr>
+                <td class="left">总和</td>
+                <td class="right">$$\sum_{i=1}^{n}x_i$$</td>
+            </tr>
+            <tr>
+                <td class="left">均值</td>
+                <td class="right">$$\frac{1}{n}\sum_{i=1}^{n}x_i$$</td>
+            </tr>
+            <tr>
+                <td class="left">测量列的实验标准差</td>
+                <td class="right">$$\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2}$$</td>
+            </tr>
+            <tr>
+                <td class="left">平均值的实验标准差</td>
+                <td class="right">$$\sqrt{\frac{1}{n(n-1)}\sum_{i=1}^{n}(x_i-\bar{x})^2}$$</td>
+            </tr>
+            <tr>
+                <td class="left">测量列的平均绝对误差</td>
+                <td class="right">$$\frac{1}{n}\sum_{i=1}^{n}{\left\lvert{x_i-\bar{x}}\right\rvert}$$</td>
+            </tr>
+            <tr>
+                <td class="left last">平均值的平均绝对误差</td>
+                <td class="right last">$$\frac{1}{n\sqrt{n}}\sum_{i=1}^{n}{\left\lvert{x_i-\bar{x}}\right\rvert}$$</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="./javascript/t.js"></script>
+<script src="./javascript/output.js"></script>
+<script src="./javascript/main.js"></script>
