@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <title>大学物理实验误差计算器</title>
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href=".\css\main.css">
 </head>
 
 <body>
@@ -69,73 +69,45 @@
             <table id="statistic">
                 <tr>
                     <th class="left">计算类型</th>
-                    <th class="right">计算值</th>
+                    <th class="right value" onclick="toggleF()">计算值（切换公式）</th>
+                    <th class="right formula" onclick="toggleV()">公式（切换计算值）</th>
                 </tr>
                 <tr>
                     <td class="left">总和</td>
-                    <td id="summation" class="right"></td>
+                    <td id="summation" class="right value"></td>
+                    <td class="right formula">\(\sum_{i=1}^{n}x_i\)</td>
                 </tr>
                 <tr>
                     <td class="left">均值</td>
-                    <td id="mean" class="right"></td>
+                    <td id="mean" class="right value"></td>
+                    <td class="right formula">\(\frac{1}{n}\sum_{i=1}^{n}x_i\)</td>
                 </tr>
                 <tr>
                     <td class="left">测量列的实验标准差</td>
-                    <td id="sstddev" class="right"></td>
+                    <td id="sstddev" class="right value"></td>
+                    <td class="right formula">\(\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2}\)</td>
                 </tr>
                 <tr>
                     <td class="left">平均值的实验标准差</td>
-                    <td id="sstderr" class="right"></td>
+                    <td id="sstderr" class="right value"></td>
+                    <td class="right formula">\(\sqrt{\frac{1}{n(n-1)}\sum_{i=1}^{n}(x_i-\bar{x})^2}\)</td>
                 </tr>
                 <tr>
                     <td class="left">测量列的平均绝对误差</td>
-                    <td id="absdev" class="right"></td>
+                    <td id="absdev" class="right value"></td>
+                    <td class="right formula">\(\frac{1}{n}\sum_{i=1}^{n}{\left\lvert{x_i-\bar{x}}\right\rvert}\)</td>
                 </tr>
                 <tr>
                     <td class="left last">平均值的平均绝对误差</td>
-                    <td id="abserr" class="last right"></td>
+                    <td id="abserr" class="last right value"></td>
+                    <td class="right formula last">\(\frac{1}{n\sqrt{n}}\sum_{i=1}^{n}{\left\lvert{x_i-\bar{x}}\right\rvert}\)</td>
                 </tr>
             </table>
         </div>
     </div>
-    <div class="sidebar-button box">
-        <div id="show_fomula">查看公式</div>
-    </div>
-    <div id="formula-sidebar">
-        <table id="fomula">
-            <tr>
-                <th class="left">计算类型</th>
-                <th class="right">公式</th>
-            </tr>
-            <tr>
-                <td class="left">总和</td>
-                <td class="right">$$\sum_{i=1}^{n}x_i$$</td>
-            </tr>
-            <tr>
-                <td class="left">均值</td>
-                <td class="right">$$\frac{1}{n}\sum_{i=1}^{n}x_i$$</td>
-            </tr>
-            <tr>
-                <td class="left">测量列的实验标准差</td>
-                <td class="right">$$\sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2}$$</td>
-            </tr>
-            <tr>
-                <td class="left">平均值的实验标准差</td>
-                <td class="right">$$\sqrt{\frac{1}{n(n-1)}\sum_{i=1}^{n}(x_i-\bar{x})^2}$$</td>
-            </tr>
-            <tr>
-                <td class="left">测量列的平均绝对误差</td>
-                <td class="right">$$\frac{1}{n}\sum_{i=1}^{n}{\left\lvert{x_i-\bar{x}}\right\rvert}$$</td>
-            </tr>
-            <tr>
-                <td class="left last">平均值的平均绝对误差</td>
-                <td class="right last">$$\frac{1}{n\sqrt{n}}\sum_{i=1}^{n}{\left\lvert{x_i-\bar{x}}\right\rvert}$$</td>
-            </tr>
-        </table>
-    </div>
 </body>
-
 </html>
+
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
