@@ -1,6 +1,6 @@
 function match(a, s) {
     let exp = 0;
-    if (s === 0) {
+    if (s === 0 || s === NaN) {
         return [a, s, 0];
     }
     while (s >= 10) {
@@ -26,6 +26,9 @@ function match(a, s) {
     }
     let eExp = 0;
     let out = Math.round(a * Math.pow(10, -exp));
+    if (out === 0) {
+        return [a, s, 0];
+    }
     while (out >= 10) {
         out /= 10;
         eExp++;
