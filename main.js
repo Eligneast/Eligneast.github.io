@@ -4,8 +4,8 @@ const calculateButton = document.getElementById('calculate-button');
 const dataTextarea = document.getElementById('input_data');
 const infDOF = document.getElementById('DF_inf');
 
-var sStdErr;
-var mean;
+let sStdErr;
+let mean;
 
 function calculate() {
     const raw_data = dataTextarea.value.trim().split(/[,\s，]/);
@@ -21,6 +21,7 @@ function calculate() {
             data.push(value);
         }
     }
+
     if (n > 0) {
         mean = sum / n;
         let squaredTotalDev = 0.0;
@@ -38,7 +39,7 @@ function calculate() {
         let absDev = absTotalDev / n;
         let absErr = absDev / Math.sqrt(n);
 
-        document.getElementById("summation").textContent = sum;
+        document.getElementById("summation").textContent = sum.toFixed(7);
         document.getElementById("mean").textContent = mean;
         document.getElementById("sstddev").textContent = sStdDev;
         document.getElementById("sstderr").textContent = sStdErr;
@@ -70,34 +71,23 @@ function uncertainty() {
     document.getElementById("p2").textContent = "" + exps[2];
 }
 
-// 获取查看公式按钮和侧边栏元素
-const showFormulaButton = document.getElementById('show_fomula');
-const formulaSidebar = document.getElementById('formula-sidebar');
+const tableFormulas = document.getElementsByClassName('formula');
+const tableValues = document.getElementsByClassName('value');
 
-// 添加点击事件监听器
-showFormulaButton.addEventListener('click', (event) => {
-    // 阻止事件冒泡
-    event.stopPropagation();
-
-    // 判断侧边栏的当前状态，如果是隐藏的，则显示它；否则，隐藏它
-    const isVisible = formulaSidebar.classList.contains('show');
-    if (isVisible) {
-        showFormulaButton.classList.remove('show');
-        formulaSidebar.classList.remove('show');
-    } else {
-        showFormulaButton.classList.add('show');
-        formulaSidebar.classList.add('show');
+function toggleF() {
+    for (var i = 0; i < tableValues.length; i++) {
+        tableValues[i].style.display = 'none';
     }
-});
-
-// 添加全局点击事件监听器
-document.addEventListener('click', (event) => {
-    // 如果用户点击了 formulaSidebar 以内的元素，则不隐藏它
-    if (event.target.closest('#formula-sidebar')) {
-        return;
+    for (var i = 0; i < tableFormulas.length; i++) {
+        tableFormulas[i].style.display = 'table-cell';
     }
+}
 
-    // 隐藏 formulaSidebar
-    showFormulaButton.classList.remove('show');
-    formulaSidebar.classList.remove('show');
-});
+function toggleV() {
+    for (var i = 0; i < tableValues.length; i++) {
+        tableValues[i].style.display = 'table-cell';
+    }
+    for (var i = 0; i < tableFormulas.length; i++) {
+        tableFormulas[i].style.display = 'none';
+    }
+}
